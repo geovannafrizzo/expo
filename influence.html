@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INFLUENCE</title>
+<style>
+@property --v{syntax:'<number>';initial-value:0;inherits:false}
+:root{--acc:#FF6B57}
+*{box-sizing:border-box;margin:0}html{font-size:clamp(16px,2.3vmin,32px)}
+body{height:100vh;overflow:hidden;background:#0E0C0B;color:#F6EFE8;font-family:'Segoe UI Variable Display','Segoe UI','Helvetica Neue',Arial,sans-serif}
+#app{position:fixed;inset:0;--mc:transparent}
+.bg,.shade,.vig,.ui{position:absolute;inset:0}.bg .im{position:absolute;inset:0;animation:kb 24s ease-out both}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.shade{background:linear-gradient(90deg,rgba(14,12,11,.85),rgba(14,12,11,.15) 60%,rgba(14,12,11,.5)),linear-gradient(0deg,rgba(14,12,11,.9),transparent 45%)}
+.vig{pointer-events:none;box-shadow:inset 0 0 9rem 1rem var(--mc);transition:box-shadow .8s}
+#app[data-mood=crisis] .vig{animation:pl 2.4s ease-in-out infinite}#app[data-mood=doubt] .bg{filter:saturate(.55)}
+@keyframes pl{50%{box-shadow:inset 0 0 13rem 3rem var(--mc)}}
+.im{position:relative;overflow:hidden;background:radial-gradient(circle at 24% 22%,hsl(var(--h) 60% 40%/.9),transparent 42%),radial-gradient(circle at 78% 72%,hsl(calc(var(--h) + 50) 55% 32%/.9),transparent 48%),radial-gradient(circle at 60% 18%,hsl(var(--h) 70% 70%/.35) 0 .5rem,transparent .6rem),radial-gradient(circle at 36% 80%,hsl(var(--h) 70% 70%/.28) 0 .9rem,transparent 1rem),linear-gradient(160deg,hsl(var(--h) 26% 17%),#0E0C0B)}
+.im::before{content:'';position:absolute;inset:.6rem;opacity:.45;background:linear-gradient(#fff,#fff) 0 0/1rem .1rem,linear-gradient(#fff,#fff) 0 0/.1rem 1rem,linear-gradient(#fff,#fff) 100% 0/1rem .1rem,linear-gradient(#fff,#fff) 100% 0/.1rem 1rem,linear-gradient(#fff,#fff) 0 100%/1rem .1rem,linear-gradient(#fff,#fff) 0 100%/.1rem 1rem,linear-gradient(#fff,#fff) 100% 100%/1rem .1rem,linear-gradient(#fff,#fff) 100% 100%/.1rem 1rem;background-repeat:no-repeat}
+.im::after{content:attr(data-f);position:absolute;left:1.1rem;bottom:.9rem;font:600 .5rem/1 ui-monospace,Consolas,monospace;letter-spacing:.08em;color:rgba(255,255,255,.55)}
+.im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.ui{padding:5.4rem 4vw 3vh}.ui>*{animation:in .7s both}.ui>*:nth-child(2){animation-delay:.12s}.ui>*:nth-child(3){animation-delay:.24s}
+@keyframes in{from{opacity:0;transform:translateY(1rem)}}
+.k{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--acc)}
+h1{font-size:2.6rem;line-height:1.02;font-weight:800;letter-spacing:-.01em}h2{font-size:2.3rem;line-height:1.05;font-weight:800}
+.lead{font-size:1.1rem;line-height:1.4;max-width:34em}.sm{font-size:.8rem;opacity:.8}
+.btn{all:unset;cursor:pointer;align-self:flex-start;background:var(--acc);color:#0E0C0B;padding:.9rem 2.2rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;clip-path:polygon(.7rem 0,100% 0,calc(100% - .7rem) 100%,0 100%);transition:transform .15s,filter .15s}
+.btn:hover,.btn:focus-visible{transform:translateX(.3rem);filter:brightness(1.12)}
+.ctl{position:fixed;top:.8rem;right:1rem;display:flex;gap:.6rem;z-index:8}.ctl button{all:unset;cursor:pointer;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;background:rgba(14,12,11,.7);border:.08rem solid rgba(255,255,255,.3);padding:.35rem .7rem}
+.hud{position:absolute;z-index:4;top:.9rem;left:1.6rem;right:12rem;display:flex;gap:1.5rem;align-items:flex-end}
+.day{border-right:.08rem solid rgba(255,255,255,.3);padding-right:1.2rem}.day b{font-size:1.9rem;line-height:1}
+.day small,.st small,.md small{display:block;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.st{position:relative;flex:1;max-width:9rem}.st b{font-size:1.5rem;line-height:1.1;display:block}
+.st i{display:block;height:.4rem;margin-top:.2rem;transition:--v .9s;background:linear-gradient(90deg,var(--c) calc(var(--v)*10%),rgba(255,255,255,.2) 0);-webkit-mask:repeating-linear-gradient(90deg,#000 0 8%,transparent 8% 10%);mask:repeating-linear-gradient(90deg,#000 0 8%,transparent 8% 10%)}
+.st u{position:absolute;right:0;top:-.1rem;font-weight:800;font-size:.9rem;text-decoration:none;animation:in .6s both}.st u.up{color:#4FD6A0}.st u.dn{color:#FF6B57}
+.md b{color:var(--c);font-size:1.1rem}
+.phone{position:absolute;right:4vw;top:5.4rem;bottom:3vh;width:min(24rem,32vw);background:#17130F;border:.45rem solid #2b241d;border-radius:2.2rem;overflow:hidden;box-shadow:0 2rem 5rem rgba(0,0,0,.6);display:flex;flex-direction:column}
+.pn{display:flex;gap:.7rem;align-items:center;padding:1rem 1rem .7rem}.pn .av{width:2.6rem;height:2.6rem;border-radius:50%;overflow:hidden;flex:none}.pn b{font-size:.9rem}.pn small{display:block;font-size:.55rem;opacity:.6}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.2rem;padding:.2rem}.grid .im,.grid .e{aspect-ratio:1}.grid .e{background:rgba(255,255,255,.06)}
+.pst .im{aspect-ratio:4/5}.pst p{padding:.6rem .9rem;font-size:.9rem}
+.cm{padding:.4rem .9rem;display:grid;gap:.55rem;overflow:auto}.cmt{font-size:.95rem;border-left:.2rem solid var(--c);padding-left:.6rem;animation:in .5s both;animation-delay:calc(var(--i)*.8s + .5s)}.cmt u{display:block;text-decoration:none;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:800}
+.sit{max-width:27rem}.sit p{font-size:1.5rem;line-height:1.25;font-weight:600;margin-top:.3rem}
+.drafts{position:absolute;left:4vw;bottom:3vh;right:calc(min(24rem,32vw) + 8vw);display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.draft{all:unset;cursor:pointer;position:relative;display:block;aspect-ratio:4/5;max-height:50vh;overflow:hidden;box-shadow:0 1rem 3rem rgba(0,0,0,.6);transition:transform .25s}
+.draft .im{position:absolute;inset:0}.draft .cap{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:3rem 1rem .9rem;background:linear-gradient(transparent,rgba(14,12,11,.93))}
+.draft b,.tile b,.act b{display:block;font-size:1.1rem}.draft span,.tile span,.act span{font-size:.9rem;opacity:.85;display:block;line-height:1.3}
+.draft:hover,.draft:focus-visible{transform:translateY(-.7rem) scale(1.03);outline:.16rem solid var(--acc)}
+.draft i,.tile i,.act i{position:absolute;z-index:3;top:.6rem;left:.6rem;min-width:1.7rem;height:1.7rem;display:grid;place-items:center;background:#F6EFE8;color:#0E0C0B;font:800 .85rem/1 'Segoe UI',Arial,sans-serif;font-style:normal}
+.cre{position:absolute;inset:0}.rail{position:absolute;left:4vw;top:5.5rem;list-style:none;display:grid;gap:.9rem}.rail li{border-left:.2rem solid rgba(255,255,255,.25);padding-left:.8rem;opacity:.55}.rail li.on{border-color:var(--acc);opacity:1}.rail li.ok{opacity:.95;border-color:#4FD6A0}.rail b{display:block;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase}.rail span{font-size:.95rem;font-weight:600}
+.por{position:absolute;left:34%;top:0;bottom:0;width:min(34rem,38vw)}.por .ptr{position:absolute;inset:0;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 72%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 72%,transparent)}
+.pv{position:fixed;right:4vw;top:6.5rem;width:13rem;z-index:3}.pv .im{aspect-ratio:1;border:.15rem solid #F6EFE8;transform:rotate(3deg);box-shadow:0 1rem 3rem rgba(0,0,0,.6)}.pv small{display:block;margin-top:.5rem;font-size:.7rem}
+.tiles{position:absolute;left:4vw;right:4vw;bottom:3vh;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;z-index:3}
+.tile{all:unset;cursor:pointer;position:relative;display:grid;grid-template-columns:7rem 1fr;gap:.9rem;align-items:center;background:rgba(14,12,11,.82);border:.08rem solid rgba(255,255,255,.2);padding:.6rem;transition:transform .2s}
+.tile .im{height:6.4rem}.tile:hover,.tile:focus-visible{transform:translateY(-.4rem);border-color:var(--acc);outline:none}
+.ntf{position:absolute;left:4vw;top:5.6rem;max-width:30rem;background:#F6EFE8;color:#0E0C0B;padding:1rem 1.2rem;border-radius:.9rem;box-shadow:0 1.5rem 4rem rgba(0,0,0,.5)}.ntf i{float:right;font-style:normal;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6}.ntf b{display:block;font-size:.95rem}.ntf p{font-size:1.1rem;line-height:1.3;margin-top:.4rem}
+.evh{position:absolute;right:4vw;top:6rem;max-width:26rem;text-align:right}
+.acts{position:absolute;left:4vw;bottom:3vh;width:min(46rem,70vw);display:grid;gap:.7rem}
+.act{all:unset;cursor:pointer;position:relative;display:block;padding:1rem 1.2rem 1rem 3.4rem;background:rgba(14,12,11,.82);border-left:.35rem solid var(--acc);transition:transform .2s,background .2s}
+.act:hover,.act:focus-visible{background:var(--acc);color:#0E0C0B;transform:translateX(.8rem)}.act i{top:1rem}
+.nar{position:absolute;left:4vw;top:5.6rem;bottom:3vh;width:min(36rem,48vw);display:flex;flex-direction:column;justify-content:flex-end;gap:.8rem}.nar .tx{font-size:1.2rem;line-height:1.35;font-weight:600}
+.ttl{position:absolute;left:5vw;bottom:8vh;max-width:40rem;display:grid;gap:1rem}.ttl h1{font-size:6.8rem;font-weight:900;letter-spacing:.02em;line-height:.95}.obj{border-left:.2rem solid var(--acc);padding-left:.9rem;font-size:.95rem}.obj b{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc)}
+.brf{position:absolute;left:5vw;top:6rem;bottom:5vh;width:min(46rem,70vw);display:flex;flex-direction:column;justify-content:center;gap:1rem}.brf ul{list-style:none;display:grid;gap:.5rem}.brf li{border-left:.3rem solid var(--c);padding-left:.8rem;font-size:.9rem}.brf li b{margin-right:.5rem;color:var(--c)}
+.sheet{position:absolute;right:4vw;top:5.6rem;bottom:3vh;width:min(25rem,34vw);background:rgba(14,12,11,.85);padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;justify-content:center}.sheet .row{border-bottom:.06rem solid rgba(255,255,255,.2);padding-bottom:.5rem}.sheet .row small{display:block;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;opacity:.65}.sheet .row b{font-size:1.05rem}
+.end{position:absolute;left:4vw;right:4vw;bottom:3vh;display:grid;gap:.9rem}.tl{display:flex;gap:1rem;list-style:none;overflow:auto}.tl li{min-width:10rem;border-top:.15rem solid var(--acc);padding-top:.5rem;font-size:.8rem}.tl em{display:block;font-style:normal;font-size:.65rem;opacity:.75;margin-top:.2rem}
+.q{font-size:2.5rem;font-weight:800;line-height:1.1;max-width:22em}.q2{font-size:1.1rem;max-width:32em;border-left:.3rem solid #4FD6A0;padding-left:1rem}
+.sel{outline:.2rem solid var(--acc)!important;transform:translateY(-.5rem) scale(1.03)}.act.sel{background:var(--acc);color:#0E0C0B;transform:translateX(.8rem)}#cf{position:fixed;left:50%;bottom:.8rem;transform:translateX(-50%);background:var(--acc);color:#0E0C0B;padding:.6rem 1.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.7rem;z-index:7;display:none}.mp{width:8rem;aspect-ratio:4/5;border:.12rem solid var(--acc);box-shadow:0 1rem 3rem rgba(0,0,0,.6);animation:in .7s both}
+#cut{position:fixed;inset:0;background:#0E0C0B;pointer-events:none;z-index:9;opacity:0}#cut.sw{animation:cut .8s}@keyframes cut{0%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){*,#cut{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}}
+@media(max-width:900px){.phone{display:none}.drafts{right:4vw}.hud{right:1rem;gap:.7rem}.ttl h1{font-size:3.6rem}.tiles,.drafts{grid-template-columns:1fr}.por{left:10%}}
+</style>
+</head>
+<body>
+<div id="app"></div><div id="cf"></div><div id="cut"></div>
+<div class="ctl"><button onclick="undo()">Desfazer (Z)</button><button id="rs" onclick="rst()">Reiniciar</button></div>
+<script>
+const $=q=>document.querySelector(q),CL={ink:'#0E0C0B',red:'#FF6B57',teal:'#4FD6A0',mus:'#F4C36B',blue:'#8DB4FF',paper:'#F6EFE8'},cl=x=>Math.max(0,Math.min(10,x));
+const LOOK=[['Ateliê','Suéter mostarda, luz de janela, papéis espalhados'],['Estúdio','Linho azul-tinta, bancada organizada'],['Editorial','Blazer vermelho, cenário curado']];
+const PERS=[['Espontânea','Fala como amiga, humor seco, frases curtas','raw','Diz amar o improviso, mas refaz o mesmo story quatro vezes.'],['Metódica','Explica passo a passo e mostra como fez','tip','Prega desacelerar, mas vive com a agenda lotada.'],['Inspiradora','Fala em tom de revista, com frases que ficam','aspire','Critica o consumismo, mas coleciona cadernos.']];
+const NICHE=[['Design e rotina criativa','Bastidores de projetos e de dias de trabalho'],['Casa e organização','Espaços pequenos e rotinas simples'],['Carreira e recomeços','Começar de novo sem romantizar']];
+const VAL=[['Transparência','Mostrar o que dá certo e o que dá errado'],['Consumo consciente','Recomendar pouco, só o que usa'],['Ambição','Crescer sem pedir desculpas']];
+const IMG=[['A amiga acessível','Parece alguém que você conhece','raw'],['A referência confiável','Parece quem você consultaria','tip'],['A vida desejável','Parece o que você quer ter','aspire']];
+const CO=[LOOK,PERS,NICHE,VAL,IMG],CQ=['Como ela aparece?','Como ela se comunica?','Sobre o que ela fala?','No que ela acredita?','Que imagem quer passar?'];
+const PD={rot:{t:'raw',n:'Um dia comum',c:'Café frio, mesa bagunçada, projeto atrasado. Pois é.',e:[1,2,1]},his:{t:'raw',n:'A história por trás',c:'O primeiro projeto que deu errado e o que ele me ensinou.',e:[1,2,2]},dic:{t:'tip',n:'Dica em dez minutos',c:'Passo a passo simples para organizar a semana sem se cobrar demais.',e:[1,1,2]},asp:{t:'aspire',n:'A vida bem enquadrada',c:'Luz dourada, bancada impecável, domingo perfeito.',e:[2,1,-1]},rec:{t:'ad',n:'Recomendação de produto',c:'Testei por duas semanas e conto o que funcionou.',e:[2,0,-1]},opi:{t:'hot',n:'Opinião sem rodeio',c:'Trabalhar sem parar não é virtude. Eu disse.',e:[3,2,-1]}};
+const OPT=[['rot','dic','asp'],['his','rec','opi'],['rot','his','asp'],['dic','rec','opi']],RS=['Dia 1. Primeira publicação. A audiência ainda não sabe quem ela é.','Dia 3. Chegaram os primeiros comentários. Alguns pedem mais.','Dia 6. O perfil tem rotina. Agora existe expectativa.','Dia 9. A audiência já tem uma ideia formada dela.'];
+const DL=[{h:'A proposta da Linha Mansa',s:'Uma marca oferece um valor alto por uma publicação. O produto é um caderno descartável, longe do que ela diz defender.',o:[['Aceitar como veio','Publicar o roteiro da marca, sem ressalvas',v=>[3,1,-2,v==1?-3:v==2?1:-1],'O dinheiro entra e o alcance cresce. Parte do público pergunta quando ela mudou de ideia.'],['Aceitar com condições','Declarar o acordo e falar dos pontos fracos',v=>[1,1,0,v==0?2:0],'A marca estranha, mas aceita. Poucos se animam; quem acompanha percebe o cuidado.'],['Recusar','Dizer não e explicar por quê',v=>[0,0,1,v==1?2:v==2?-1:1],'A recusa vira assunto. Para uns, coerência; para outros, uma chance perdida.']]},
+{h:'O tema que divide',s:'Uma discussão está em alta e todos pedem a opinião dela. Entrar rende alcance, mas também críticas.',o:[['Publicar direto','Opinião forte, sem rodeios',(v,p)=>[4,3,-2,p==0?1:0],'A publicação explode. A conversa foge do controle e o tom vira o assunto.'],['Publicar com nuance','Mostrar dúvidas e indicar fontes',(v,p)=>[2,1,1,p==1?1:0],'O alcance é menor, mas a conversa fica mais calma e mais longa.'],['Ficar de fora','Não entrar na discussão',v=>[0,-1,0,v==1?1:0],'O assunto passa. Para uns o silêncio é prudência; para outros, ausência.']]},
+{h:'O público quer mais dela',s:'Seguidores pedem a rotina em casa, a família, a vida fora do trabalho. Mostrar mais aproxima, mas expõe.',o:[['Mostrar tudo','Família, casa e bastidores',v=>[1,3,-1,v==0?1:-1],'A audiência se aproxima, e a intimidade vira cobrança por mais.'],['Mostrar uma parte','Combinar o que entra e o que fica de fora',()=>[0,1,1,1],'Os limites são aceitos. A proximidade cresce devagar.'],['Manter privado','Proteger a vida pessoal',(v,p,i)=>[0,-1,1,i==2?1:0],'A distância vira mistério para alguns e frieza para outros.']]}];
+const CM={iden:[['bia.lopes','Isso aqui sou eu numa segunda-feira. Obrigada por não fingir.'],['carol.mendes','Salvei. Faz sentido com tudo o que ela já falou.'],['ju.tavares','É raro ver alguém assim sem filtro de mentira.'],['marcos.a','Parece que ela fala comigo, não para mim.']],enth:[['lari_cria','QUE publicação. Mandei pra três amigas agora.'],['pedro.h','Esse perfil vai longe, anota aí.'],['nanda.s','Já viciei. Quando sai a próxima?'],['thi.rocha','Mandei no grupo da firma e todo mundo amou.']],doubt:[['rafa.n','Será que isso é patrocinado ou ela acredita mesmo?'],['dani.c','Antes ela dizia outra coisa, né?'],['leo.v','Bonito, mas eu queria ver a prova.'],['sofia.m','Fiquei com um pé atrás. Só eu?']],crit:[['gabi.ferraz','Entendi o ponto, mas o tom foi pesado.'],['hugo.p','Conveniente demais pra quem ganha com isso.'],['vivi.q','Decepcionada. Esperava mais coerência.'],['tomas.r','Fácil engajar com polêmica. Difícil é sustentar.']],indif:[['ana.k','Passou batido no meu feed.'],['caio.t','Ok.'],['mila.b','Nem vi direito, rolei.'],['fer.d','Normal. Já vi igual hoje.']]};
+const CT={iden:['Identificação',CL.teal],enth:['Entusiasmo',CL.mus],doubt:['Dúvida',CL.blue],crit:['Crítica',CL.red],indif:['Indiferença','#6d6a7a']};
+const TR=[['Todo mundo viu. Poucos acreditam.','O alcance chegou rápido, mas a confiança ficou instável: a audiência observa, comenta e hesita em recomendar.'],['Crescimento sem atalhos','A audiência cresceu junto com a confiança. A reputação se firmou porque o que ela diz, mostra e faz se reconhecem.'],['Poucos, mas de verdade','O alcance ficou limitado e a identificação ficou forte: um público específico se reconhece nela e a defende.'],['Muita imagem, pouco rumo','Houve movimento, mas faltou direção: a imagem pública ficou difusa.']];
+const ST=['title','how','c0','c1','c2','c3','c4','prof','r0','r1','d0','r2','d1','r3','d2','end0','end1'],R0=ST.indexOf('r0'),ML=[['A','Alcance'],['E','Engajamento'],['C','Confiança'],['K','Coerência'],['R','Reputação']];
+let S,H=[],rsT;
+function init(){S={feed:[],mood:'calm',i:0,fx:null,p:{},m:{A:1,E:1,C:5,K:5,R:5},log:[],used:[]};H=[]}
+function cms(d,s){const f=[],[a,e,c,k]=d;if(k>=1||c>=2)f.push('iden');if(e>=2)f.push('enth');if(c<0||k<0)f.push('doubt');if(c<=-2||(a>=3&&c<0))f.push('crit');if(a+e<=1)f.push('indif');['iden','doubt','enth','indif','crit'].forEach(x=>{if(f.length<3&&!f.includes(x))f.push(x)});return f.slice(0,3).map(x=>[x,...CM[x][s%4]])}
+function kc(t){const p=S.p,v=p.c3;let k=(t==PERS[p.c1][2])+(t==IMG[p.c4][2]);if(v==0&&t=='ad')k--;if(v==0&&t=='raw')k++;if(v==1&&t=='ad')k-=2;if(v==1&&t=='aspire')k--;if(v==2&&(t=='ad'||t=='aspire'||t=='hot'))k++;return Math.max(-2,Math.min(2,k))}
+function apply(d,t,cap,tx,id,tag){const m=S.m,o={...m};m.A=cl(m.A+d[0]);m.E=cl(m.E+d[1]);m.C=cl(m.C+d[2]);m.K=cl(m.K+d[3]);m.R=Math.round((m.R+(m.C+m.K)/2)/2);S.fx={d:[m.A-o.A,m.E-o.E,m.C-o.C,m.K-o.K,m.R-o.R],t,cap,tx,id,tag,cm:cms(d,S.log.length)};S.log.push({t,d:S.fx.d});S.mood=mood(S.fx)}
+function snap(){H.push(JSON.stringify(S))}
+function doPick(k){const s=ST[S.i];if(S.fx||s.length!=2||!'crd'.includes(s[0]))return;const n=+s[1];if(k>2)return;snap();
+if(s[0]=='c')S.p['c'+n]=k,S.i++;
+else if(s[0]=='r'){const id=OPT[n][k],q=PD[id],kk=kc(q.t),rp=S.used.includes(id);S.used.push(id);S.feed.push(id);apply([q.e[0],q.e[1]-(rp?1:0),q.e[2]+Math.sign(kk),kk],q.n,q.c,(kk>0?'Combina com o que ela disse ser. ':kk<0?'Destoa do que ela disse valorizar. ':'Não reforça nem contradiz a imagem dela. ')+(rp?'Formato repetido: a audiência já viu isso.':''),id,q.t)}
+else{const o=DL[n].o[k];apply(o[2](S.p.c3,S.p.c1,S.p.c4),o[0],o[1],o[3])}
+render()}
+function nxt(){snap();S.fx=null;S.i++;render()}
+function undo(){if(H.length){S=JSON.parse(H.pop());render()}}
+function rst(){const b=$('#rs');if(b.dataset.c){clearTimeout(rsT);delete b.dataset.c;b.textContent='Reiniciar';init();render()}else{b.dataset.c=1;b.textContent='Confirmar?';rsT=setTimeout(()=>{delete b.dataset.c;b.textContent='Reiniciar'},3000)}}
+function traj(){const m=S.m,t=m.C>=8&&m.R>=7;return m.A>=9&&!t?0:t&&m.A>=7?1:(t||m.K>=6)&&m.A<=7?2:3}
+function chip(d){return['Alcance','Engaj.','Confiança','Coerência'].map((x,n)=>d[n]?x+' '+(d[n]>0?'+':'')+d[n]:'').filter(Boolean).join(' · ')||'sem mudança'}
+
+const ABC='ABC',PK=['look','expr','niche','val','img'],CQN=['Aparência','Comunicação','Nicho','Valores','Imagem'],DAY={r0:1,r1:3,d0:5,r2:6,d1:8,r3:9,d2:11},
+NF=['Linha Mansa · Proposta de parceria','Mensagem direta · Pedido de opinião','Comentários · «Mostra mais da sua vida»'],
+SN=[['A','Alcance','#F4C36B'],['E','Engajamento','#FF6B57'],['C','Confiança','#4FD6A0'],['K','Coerência','#8DB4FF'],['R','Reputação','#F6EFE8']],
+DEF={A:'quantos veem',E:'quanto reagem',C:'quanto acreditam',K:'se combina com o que ela disse ser',R:'muda devagar: acompanha confiança e coerência'},
+MOOD={calm:['Estável','#F6EFE8'],success:['Em alta','#F4C36B'],growth:['Crescimento','#4FD6A0'],doubt:['Dúvida','#C9A66B'],crisis:['Crise','#FF4B3E']};
+const hue=s=>[...s].reduce((a,c)=>a*31+c.charCodeAt(0),7)%360;
+const im=(f,c)=>`<div class="im ${c||''}" style="--h:${hue(f)}" data-f="img/${f}.jpg"><img src="img/${f}.jpg" alt="" onerror="this.remove()"></div>`;
+function mood(f){const m=S.m;return m.C<=3||f.d[2]<=-2?'crisis':f.d[2]<0||f.d[3]<0?'doubt':m.R>=7&&f.d[2]>0?'growth':f.d[0]>=2?'success':'calm'}
+const fol=()=>(900+S.m.A*2300+S.m.R*700).toLocaleString('pt-BR');
+function hud(){const f=S.fx,d=DAY[ST[S.i]];return`<div class="hud"><div class="day"><small>Dia</small><b>${d||'—'}</b></div>`+SN.map((x,n)=>`<div class="st" style="--c:${x[2]};--v:${S.m[x[0]]}"><small>${x[1]}</small><b>${S.m[x[0]]}</b><i></i>${f&&f.d[n]?`<u class="${f.d[n]>0?'up':'dn'}">${f.d[n]>0?'+':''}${f.d[n]}</u>`:''}</div>`).join('')+`<div class="md" style="--c:${MOOD[S.mood][1]}"><small>Momento</small><b>${MOOD[S.mood][0]}</b></div></div>`}
+function phone(x){return`<div class="phone"><div class="pn"><div class="av">${im('avatar')}</div><div><b>nara.teodoro</b><small>${fol()} seguidores · dado cenográfico</small></div></div>${x}</div>`}
+const feed=()=>'<div class="grid">'+Array.from({length:9},(_,i)=>S.feed[i]?im('post_'+S.feed[i]):'<div class="e"></div>').join('')+'</div>';
+function pv(n,k){if(n==0){$('.por').firstElementChild.outerHTML=im('look_'+ABC[k],'ptr')}else $('#pv').innerHTML=im(PK[n]+'_'+ABC[k])+'<small>'+CO[n][k][0]+'</small>'}
+function bgName(){const s=ST[S.i],l=S.p.c0===undefined?'A':ABC[S.p.c0];if(s=='title'||s=='how'||s=='end1')return'hero';if(s[0]=='c')return'room_base';if(s=='prof'||s[0]=='r')return'studio_'+l;if(s[0]=='d')return['event_marca','event_polemica','event_privado'][+s[1]];return'end_'+traj()}
+function ui(){const s=ST[S.i],p=S.p,n=+s[1],f=S.fx,L=p.c0===undefined?'A':ABC[p.c0],T=TR[traj()],fx=f&&s[0]!='c'&&s[0]!='p';
+if(s=='title')return`<div class="ttl"><small class="k">Um jogo sobre fama, confiança e quem decide</small><h1>INFLUENCE</h1><p class="lead">Nara tem 28 anos, uma câmera e nenhuma audiência. Ela ainda não existe. Vocês vão decidir quem ela é, o que mostra e até onde vai para ser vista.</p><p class="obj"><b>Objetivo</b>Construir uma influência que se sustente. Alcance sozinho não basta.</p><button class="btn" data-go onclick="nxt()">Iniciar</button></div>`;
+if(s=='how')return`<div class="brf"><small class="k">Briefing</small><h1>Vocês decidem. Uma pessoa clica.</h1><p class="lead">Em cada decisão, o grupo discute e vota. O operador clica na opção vencedora (ou aperta 1, 2, 3). Errou? Desfazer (Z).</p><ul>${SN.map(x=>`<li style="--c:${x[2]}"><b>${x[1]}</b>${DEF[x[0]]}</li>`).join('')}</ul><button class="btn" data-go onclick="nxt()">Criar a personagem</button></div>`;
+if(s[0]=='c')return`<div class="cre"><ol class="rail">${CQN.map((q,i)=>`<li class="${i==n?'on':p['c'+i]!==undefined?'ok':''}"><b>${q}</b><span>${p['c'+i]!==undefined?CO[i][p['c'+i]][0]:'—'}</span></li>`).join('')}</ol><div class="por">${im(p.c0===undefined?'nara_base':'look_'+L,'ptr')}</div><div id="pv" class="pv"></div></div><div class="tiles">${CO[n].map((o,k)=>`<button class="tile" onmouseenter="pv(${n},${k})" onfocus="pv(${n},${k})" onclick="pick(${k})"><i>${k+1}</i>${im(PK[n]+'_'+ABC[k])}<div><small class="k">${CQ[n]}</small><b>${o[0]}</b><span>${o[1]}</span></div></button>`).join('')}</div>`;
+if(s=='prof')return`<div class="por">${im('look_'+L,'ptr')}</div><div class="sheet"><small class="k">Perfil criado</small><h2>Nara Teodoro, 28 anos</h2>${[0,1,2,3,4].map(i=>`<div class="row"><small>${CQN[i]}</small><b>${CO[i][p['c'+i]][0]}</b></div>`).join('')}<p class="sm">Contradição dela: ${PERS[p.c1][3]}</p><button class="btn" data-go onclick="nxt()">Publicar</button></div>`;
+if(fx){const isR=s[0]=='r',mo=MOOD[S.mood];return`<div class="nar"><div class="mp">${im('mood_'+S.mood)}</div><small class="k">${isR?'Fase 3 · O público reage':'Fase 4 · Consequência'}</small><h2>${f.t}</h2><p class="tx">${f.tx||''} ${isR?'':f.cap}</p><p class="sm">Momento: <b style="color:${mo[1]}">${mo[0]}</b> · ${chip(f.d.slice(0,4))} · Reputação ${f.d[4]>0?'+':''}${f.d[4]}</p><button class="btn" data-go onclick="nxt()">${isR?'Próximo dia':'Continuar'}</button></div>`+phone((isR?`<div class="pst">${im('post_'+f.id)}<p><b>nara.teodoro</b> ${f.cap}</p></div>`:'')+`<div class="cm">${f.cm.map((c,i)=>`<div class="cmt" style="--c:${CT[c[0]][1]};--i:${i}"><u>${CT[c[0]][0]} · comentário fictício</u><b>@${c[1]}</b> ${c[2]}</div>`).join('')}</div>`)}
+if(s[0]=='r')return`<div class="sit"><small class="k">Fase 2 · Publicar · ${n+1} de 4</small><p>${RS[n]}</p></div><div class="drafts">${OPT[n].map((id,k)=>`<button class="draft" onclick="pick(${k})"><i>${k+1}</i>${im('post_'+id)}<div class="cap"><b>${PD[id].n}</b><span>${PD[id].c}</span></div></button>`).join('')}</div>`+phone(feed());
+if(s[0]=='d')return`<div class="ntf"><i>Agora</i><b>${NF[n]}</b><p>${DL[n].s}</p></div><div class="evh"><small class="k">Fase 4 · Acontecimento ${n+1} de 3</small><h2>${DL[n].h}</h2></div><div class="acts">${DL[n].o.map((o,k)=>`<button class="act" onclick="pick(${k})"><i>${k+1}</i><b>${o[0]}</b><span>${o[1]}</span></button>`).join('')}</div>`;
+if(s=='end0')return`<div class="end"><small class="k">Edição final · Nara Teodoro</small><h1>${T[0]}</h1><p class="lead">${T[1]}</p><ol class="tl">${S.log.map(l=>`<li><b>${l.t}</b><em>${chip(l.d)}</em></li>`).join('')}</ol><p class="sm">Trajetória possível do jogo, não resultado sobre influenciadores reais.</p><button class="btn" data-go onclick="nxt()">A revelação</button></div>`;
+return`<div class="brf"><small class="k">Revelação</small><p class="lead">A Nara não existe. O rosto, as imagens e os textos foram feitos com IA. A trajetória veio das decisões de vocês e de reações simuladas. Alcance, engajamento, confiança e reputação não eram a mesma coisa. O valor de uma imagem depende de quem a reconhece: ideia associada ao poder simbólico, em Pierre Bourdieu.</p><p class="q">Ela foi criada por inteligência artificial. Mas quem decidiu que ela seria perfeita?</p><p class="q2">Se nós ajudamos a decidir o que merece atenção, confiança e reconhecimento, até que ponto também participamos da construção da influência?</p><button class="btn" onclick="rstNow()">Jogar de novo</button></div>`}
+function rstNow(){init();render()}
+function render(){sel=null;$('#cf').style.display='none';const a=$('#app'),g=S.i>=R0,m=MOOD[S.mood][1];a.dataset.mood=g?S.mood:'calm';a.style.setProperty('--mc',g&&S.mood!='calm'?m+'66':'transparent');a.style.setProperty('--acc',g&&S.mood!='calm'?m:'#FF6B57');
+a.innerHTML=`<div class="bg">${im(bgName())}</div><div class="shade"></div><div class="vig"></div>`+(g&&ST[S.i]!='end1'?hud():'')+`<div class="ui">${ui()}</div>`;const w=$('#cut');w.className='';void w.offsetWidth;w.className='sw'}
+document.addEventListener('keydown',e=>{const k=e.key;if(k>='1'&&k<='3')pick(+k-1);else if(k=='z'||k=='Z')undo();else if(k=='Enter'||k==' '){const b=$('[data-go]');if(sel!==null){e.preventDefault();pick(sel)}else if(b){e.preventDefault();b.click()}}});
+let sel=null;
+function mark(k){const s=ST[S.i],els=document.querySelectorAll('.tile,.draft,.act');if(k>=els.length)return;sel=k;els.forEach((e,i)=>e.classList.toggle('sel',i==k));const c=$('#cf');c.style.display='block';c.textContent='Opção '+(k+1)+' · Enter ou clique de novo para confirmar';if(s[0]=='c')pv(+s[1],k)}
+function pick(k){const s=ST[S.i];if(S.fx||s.length!=2||!'crd'.includes(s[0]))return;if(sel===k){sel=null;doPick(k)}else mark(k)}
+init();render();
+</script>
+</body>
+</html>
